@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <cstdlib>
 
 int main(int argc, char* argv[]) {
@@ -8,7 +9,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	std::string filename = argv[1];
-	std::string output = "a.out";
+	std::string output = filename.substr(0, filename.find('.'));
 
 	std::string compile_cmd = "g++ " + filename + " -o " + output;
 
