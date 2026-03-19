@@ -1,5 +1,5 @@
 1; brun
-A simple tool to compile and run C++ files quickly.
+A simple tool to compile and run C/C++ files quickly
 
 2; Build and installation
 make -> sudo make install -> make clean
