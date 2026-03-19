@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
-		std::cout << "brun-Usage: brun <file.cpp>\n";
+		std::cout << "brun-Usage: brun <file.c/cpp>\n";
 		return 0;    
 	}
 	
