@@ -1,6 +1,8 @@
 
 brun (Basic Run) is a simple CLI tool that compiles and runs C/C++ files.
 
+![brun logo](assets/logo.png)
+
 ## Build, installation, and cleanup
 
 Run the commands: make -> sudo make install -> make clean
