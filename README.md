@@ -7,9 +7,22 @@ brun (Basic Run) is a simple CLI tool that compiles and runs C/C++ files.
 
 Run the commands: make -> sudo make install -> make clean
 
-## Usage
+## Usage and flags
 
-brun file.c/cpp
+brun works similarily to compiling with gcc, 'brun example.c' is nearly equivalent to 'gcc example.c -o example',
+the only difference being is that brun will automatically run the program after compilation (unless -c flag is present)
+
+brun has two flags that can be applied anywhere in the command.
+    -d  ;  delete compiled file after running it
+    -c  ;  only compiles and doesn't run the program
+
+Example: brun -c example.cpp
+
+## Extra
+
+If you include both flags in the command, only -d will apply
+
+Note from creator: -d is especially useful, think of it as a quick run feature :)
 
 ## Questions or suggestions?
 
