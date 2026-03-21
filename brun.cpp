@@ -2,6 +2,10 @@
 #include <string>
 #include <cstdlib>
 
+std::string runCommand() {
+	return 0;
+}	
+
 int brunprocess(bool del, bool conly, const std::string& filename, std::string& output) {
 	std::string compile_cmd;
 
@@ -40,8 +44,7 @@ int main(int argc, char* argv[]) {
 		return 0;    
 	}
 
-	bool del = false;
-	bool conly = false;
+	bool del = false, conly = false;
 
 	std::string filename;
 
