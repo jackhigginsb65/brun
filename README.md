@@ -1,5 +1,5 @@
 
-brun (Basic Run) is a simple and lightweight LI tool that compiles and runs C/C++ files.
+brun (Basic Run) is a simple and lightweight CLI tool that compiles and runs C/C++ files.
 
 ![brun logo](assets/logo.png)
 
