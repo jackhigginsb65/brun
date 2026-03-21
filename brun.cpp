@@ -2,10 +2,6 @@
 #include <string>
 #include <cstdlib>
 
-std::string runCommand() {
-	return 0;
-}	
-
 int brunprocess(bool del, bool conly, const std::string& filename, std::string& output) {
 	std::string compile_cmd;
 
