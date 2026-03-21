@@ -2,8 +2,15 @@
 #include <string>
 #include <cstdlib>
 
-int brunprocess(bool del, bool conly, const std::string& filename, std::string& output) {
-	std::string compile_cmd;
+int brunprocess(bool del, bool conly, const std::string& filename) {
+	std::string compile_cmd, output;
+
+	if (filename.find(".") == std::string::npos) {
+		std::cout << "brun: Error; Invalid filename '" << filename << "'. Check spelling?\n";
+		return 1;
+	} else {
+		output = filename.substr(0, filename.find('.'));
+	}
 
 	if (filename.find(".cpp") != std::string::npos) {
 		compile_cmd = "g++ " + filename + " -o" + output;
@@ -58,14 +65,5 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-
-	std::string output;
-
-	if (filename.find(".") == std::string::npos) {
-		std::cout << "brun: Error; Invalid filename '" << filename << "'. Check spelling?\n";
-		return 1;
-	} else {
-		output = filename.substr(0, filename.find('.'));
-	}
-	brunprocess(del, conly, filename, output);
+	brunprocess(del, conly, filename);
 }
