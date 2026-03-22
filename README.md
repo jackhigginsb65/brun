@@ -12,15 +12,19 @@ Run the commands: make -> sudo make install -> make clean
 brun works similarily to compiling with gcc, 'brun example.c' is nearly equivalent to 'gcc example.c -o example',
 the only difference being is that brun will automatically run the program after compilation (unless -c flag is present)
 
-brun has two flags that can be applied anywhere in the command.
+brun has multiple flags that can be applied anywhere in the command.
     -d  ;  delete compiled file after running it
     -c  ;  only compiles and doesn't run the program
+    -v  ;  verbose option, displays the commands brun is actually running, good for debugging
+
+    --help     ;  display the brun help page
+    --version  ;  display brun version
 
 Example: brun -c example.cpp
 
 ## Extra
 
-If you include both flags in the command, only -d will apply
+If you include the --help flag in your command, all other parts of the command will be overridden
 
 Note from creator: -d is especially useful, think of it as a quick run feature :)
 
