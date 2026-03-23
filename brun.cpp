@@ -2,9 +2,11 @@
 #include <string>
 #include <cstdlib>
 
+#define BRUN_MSG "\033[31m[brun]\033[0m "
+
 int run(const std::string& cmd, bool verbose) {
 	if (verbose) {
-		std::cout << "[brun] " << cmd << "\n";
+		std::cout << BRUN_MSG << cmd << "\n";
 	}
 	return system(cmd.c_str());
 }
@@ -13,37 +15,37 @@ int brunprocess(bool del, bool conly, bool verbose, const std::string& filename)
 	std::string compile_cmd, output;
 
 	if (filename.find(".") == std::string::npos) {
-		std::cout << "[brun] Error; Invalid filename '" << filename << "'. Check spelling?\n";
+		std::cout << BRUN_MSG << "Error; Invalid filename '" << filename << "'. Check spelling?\n";
 		return 1;
 	} else {
-		output = filename.substr(0, filename.find('.'));
+		output = filename.substr(0, filename.find_last_of('.'));
 	}
 
-	if (filename.substr(filename.size() - 4) == ".cpp") {
+	if (filename.size() >= 4 && filename.substr(filename.size() - 4) == ".cpp" || filename.substr(filename.size() - 4) == ".cxx" || filename.substr(filename.size() - 3) == ".cc") {
 		compile_cmd = "g++ " + filename + " -o " + output;
-	} else if (filename.substr(filename.size() - 2) == ".c") {
+	} else if (filename.size() >= 2 && filename.substr(filename.size() - 2) == ".c") {
 		compile_cmd = "gcc " + filename + " -o " + output;
 	} else {
-		std::cout << "[brun] Source-code is not a C/C++ file\n";
+		std::cout << BRUN_MSG << "Source-code is not a C/C++ file\n";
 		return 1;
 	}
 
-	std::cout << "[brun] Compiling...\n";
+	std::cout << BRUN_MSG << "Compiling...\n";
 	int compile_result = run(compile_cmd, verbose);
 
 	if (compile_result != 0) {
-		std::cout << "[brun] Compilation failed.\n";
+		std::cout << BRUN_MSG << "Compilation failed.\n";
 		return 1;
 	}
 
 	if (del) {
-		std::cout << "[brun] Running...\n";
+		std::cout << BRUN_MSG << "Running...\n";
 		run("./" + output, verbose);
 		run("rm " + output, verbose);
 		return 0;
 	}
 	if (!conly) {
-		std::cout << "[brun] Running...\n";
+		std::cout << BRUN_MSG << "Running...\n";
 		run("./" + output, verbose);
 	}
 	return 0;
@@ -75,21 +77,22 @@ void help() {
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
-		std::cout << "[brun] Usage: brun <file.c/cpp>\n";
+		std::cout << BRUN_MSG << "Usage: brun <file.c/cpp>\n";
 		return 0;    
 	}
 	bool del = false, conly = false, verbose = false;
 	
-	std::string version = "2.3.2", filename;
+	const std::string version = "2.3.2";
+	std::string filename;
 
 	for (int i = 1; i < argc; i++) {
 		std::string arg = argv[i];
 
-		if (arg == "--help" || arg == "--help") {
+		if (arg == "--help" || arg == "-h") {
 			help();
 			return 0;
 		} else if (arg == "--version") {
-			std::cout << "[brun] version " << version << "\n";
+			std::cout << BRUN_MSG << "version " << version << "\n";
 			return 0;	
 		} else if (arg == "-c" || arg == "-C") {
 			conly = true;
@@ -102,7 +105,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	if (filename.empty()) {
-		std::cout << "[brun] No file specified\n";
+		std::cout << BRUN_MSG << "No file specified\n";
 		return 1;
 	}
 	brunprocess(del, conly, verbose, filename);
